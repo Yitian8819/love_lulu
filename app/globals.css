@@ -88,71 +88,85 @@ button {
 .site-header {
   position: relative;
   z-index: 1;
-  min-height: min(700px, calc(100vh - 56px));
+  width: 100vw;
+  min-height: min(780px, 98vh);
+  margin: -28px 0 8px calc(50% - 50vw);
   display: flex;
   align-items: center;
-  padding: clamp(42px, 8vw, 92px) 0 clamp(30px, 6vw, 58px);
+  justify-content: center;
+  padding: clamp(78px, 13vw, 142px) max(18px, calc((100vw - 1180px) / 2)) clamp(70px, 12vw, 132px);
+  overflow: hidden;
+}
+
+.site-header::before,
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.site-header::before {
+  background:
+    linear-gradient(180deg, rgba(18, 28, 27, .34), rgba(18, 28, 27, .07) 54%, rgba(255, 253, 248, .52) 92%, rgba(255, 253, 248, .76) 100%),
+    linear-gradient(90deg, rgba(16, 23, 24, .34), rgba(16, 23, 24, .03) 34%, rgba(16, 23, 24, .22)),
+    url("/hero-sunset.jpeg") center / cover no-repeat;
+  opacity: .86;
+}
+
+.site-header::after {
+  top: auto;
+  height: 30%;
+  background: linear-gradient(180deg, transparent, rgba(255, 253, 248, .58) 74%, rgba(255, 253, 248, .88) 100%);
 }
 
 .masthead {
   position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  padding: clamp(26px, 5vw, 58px);
-  border: 1px solid rgba(255, 255, 255, .72);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, .72), rgba(255, 247, 232, .48)),
-    radial-gradient(circle at 78% 28%, rgba(220, 239, 255, .72), transparent 34%),
-    radial-gradient(circle at 20% 80%, rgba(223, 245, 234, .86), transparent 38%);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(24px);
-}
-
-.masthead::before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(77, 139, 103, .1);
-  border-radius: 8px;
-  pointer-events: none;
+  z-index: 1;
+  width: min(1080px, 100%);
+  padding: 0 clamp(2px, 2vw, 18px);
+  text-align: center;
 }
 
 .masthead-top {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .masthead h1 {
   margin: 0;
   font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "Songti SC", cursive;
-  font-size: 48px;
+  color: #fffaf0;
+  font-size: clamp(50px, 9vw, 104px);
   line-height: 1.05;
   font-weight: 800;
   letter-spacing: 0;
+  text-shadow: 0 5px 22px rgba(19, 20, 18, .42), 0 1px 0 rgba(92, 50, 26, .26);
 }
 
 .welcome-line {
-  margin: 10px 0 0;
-  color: var(--coral);
+  margin: 16px 0 0;
+  color: #fff6df;
   font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "PingFang SC", cursive;
-  font-size: clamp(18px, 3.2vw, 28px);
+  font-size: clamp(20px, 3.6vw, 38px);
   line-height: 1.35;
   font-weight: 800;
+  text-shadow: 0 4px 18px rgba(31, 22, 16, .46);
 }
 
 .masthead-subtitle {
   position: relative;
   z-index: 1;
-  margin: 24px 0 0;
-  color: #52645b;
-  font-size: clamp(16px, 2vw, 22px);
+  margin: clamp(24px, 4vw, 38px) auto 0;
+  color: rgba(255, 250, 236, .95);
+  font-size: clamp(17px, 2vw, 23px);
   line-height: 1.7;
-  max-width: 820px;
+  max-width: 850px;
+  text-wrap: balance;
+  text-shadow: 0 3px 18px rgba(20, 23, 18, .5);
 }
 
 .symbols {
@@ -182,34 +196,38 @@ button {
 .flip-timer {
   position: relative;
   z-index: 1;
-  margin-top: clamp(24px, 4vw, 42px);
+  margin: clamp(30px, 5vw, 58px) auto 0;
+  width: max-content;
+  max-width: 92vw;
 }
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(6px, 1.4vw, 14px);
+  grid-template-columns: repeat(4, clamp(74px, 14vw, 104px));
+  justify-content: center;
+  gap: clamp(10px, 2.1vw, 18px);
 }
 
 .calendar-card {
   position: relative;
-  min-height: clamp(92px, 13vw, 156px);
+  min-height: clamp(70px, 8.6vw, 112px);
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(65, 92, 78, .13);
+  border: 1px solid rgba(255, 247, 226, .48);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .96) 0 49%, rgba(48, 65, 58, .08) 49% 51%, rgba(255, 253, 248, .92) 51%),
-    #fff;
-  box-shadow: 0 24px 54px rgba(86, 118, 104, .18);
+    linear-gradient(180deg, rgba(255, 250, 237, .92) 0 49%, rgba(76, 45, 24, .14) 49% 51%, rgba(255, 246, 226, .86) 51%),
+    rgba(255, 246, 226, .84);
+  box-shadow: 0 18px 40px rgba(24, 23, 19, .18);
   transform-style: preserve-3d;
+  backdrop-filter: blur(6px);
 }
 
 .calendar-card::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: clamp(30px, 4vw, 42px);
-  background: linear-gradient(90deg, rgba(233, 121, 112, .92), rgba(242, 167, 170, .78));
+  height: clamp(26px, 3.2vw, 36px);
+  background: linear-gradient(90deg, rgba(192, 83, 49, .92), rgba(238, 142, 60, .82));
 }
 
 .calendar-card::after {
@@ -229,13 +247,15 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: clamp(92px, 13vw, 156px);
-  padding: clamp(30px, 4vw, 42px) 6px 0;
-  color: #2f493b;
-  font-size: clamp(32px, 7.2vw, 86px);
+  min-height: clamp(70px, 8.6vw, 112px);
+  padding: clamp(26px, 3.2vw, 36px) 6px 0;
+  color: #4a2c1d;
+  font-family: ui-serif, "Songti SC", "STSong", Georgia, serif;
+  font-size: clamp(26px, 4.8vw, 58px);
   line-height: 1;
-  font-weight: 850;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
   transition: transform .22s ease;
 }
 
@@ -245,7 +265,7 @@ button {
   top: clamp(8px, 1.2vw, 12px);
   z-index: 1;
   color: #fff;
-  font-size: clamp(9px, 1.7vw, 13px);
+  font-size: clamp(9px, 1.3vw, 12px);
   font-weight: 850;
   letter-spacing: .08em;
 }
@@ -785,7 +805,8 @@ section {
 
   .site-header {
     min-height: 0;
-    padding-top: 28px;
+    padding-top: clamp(64px, 14vw, 92px);
+    padding-bottom: clamp(58px, 12vw, 92px);
   }
 
   .symbols {
@@ -833,27 +854,42 @@ section {
     padding: 20px;
   }
 
+  .site-header {
+    min-height: 720px;
+    margin-top: -10px;
+    padding: 72px 18px 96px;
+  }
+
+  .masthead {
+    padding: 0 4px;
+  }
+
+  .masthead-subtitle {
+    font-size: 16px;
+  }
+
   .window-bar {
     padding: 10px 12px;
   }
 
   .calendar-grid {
-    gap: 6px;
+    grid-template-columns: repeat(4, clamp(66px, 17vw, 82px));
+    gap: 8px;
   }
 
   .calendar-card {
-    min-height: 86px;
+    min-height: 68px;
   }
 
   .calendar-card b {
-    min-height: 86px;
-    padding-top: 30px;
-    font-size: clamp(26px, 9vw, 38px);
+    min-height: 68px;
+    padding-top: 28px;
+    font-size: clamp(22px, 7vw, 31px);
   }
 
   .calendar-card span {
     left: 8px;
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .symbols {

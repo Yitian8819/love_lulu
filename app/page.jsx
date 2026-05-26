@@ -108,11 +108,8 @@ function Hero({ timeValues }) {
     <section className="site-header" aria-label="甘蔗和小鹿的网页抬头">
       <div className="masthead">
         <div className="masthead-top">
-          <div>
-            <h1>甘蔗 & 小鹿</h1>
-            <p className="welcome-line">欢迎光临甘蔗和小鹿的小家！</p>
-          </div>
-          <DeerSymbol />
+          <h1>甘蔗 & 小鹿</h1>
+          <p className="welcome-line">欢迎光临甘蔗和小鹿的小家！</p>
         </div>
 
         <div className="flip-timer" aria-label="相爱正计时">
