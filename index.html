@@ -630,6 +630,13 @@
       font-weight: 800;
     }
 
+    .place-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(118px, 168px);
+      gap: 20px;
+      align-items: start;
+    }
+
     .place-kicker {
       color: var(--leaf);
       font-size: 13px;
@@ -657,6 +664,46 @@
       color: #5e7067;
       font-size: 15px;
       line-height: 1.85;
+    }
+
+    .place-photo {
+      width: min(168px, 100%);
+      aspect-ratio: 9 / 16;
+      margin: 0;
+      justify-self: end;
+      border: 1px solid rgba(77, 139, 103, .18);
+      border-radius: 8px;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(223, 245, 234, .72), rgba(255, 247, 232, .8));
+      box-shadow: 0 16px 30px rgba(77, 139, 103, .1);
+    }
+
+    .place-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .place-photo-placeholder {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      color: #5e7067;
+      text-align: center;
+    }
+
+    .place-photo-placeholder span {
+      font-size: 30px;
+    }
+
+    .place-photo-placeholder b {
+      color: var(--leaf);
+      font-family: ui-serif, "Songti SC", "STSong", Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
     }
 
     .map-note {
@@ -757,6 +804,10 @@
     @media (max-width: 860px) {
       .map-grid {
         grid-template-columns: 1fr;
+      }
+
+      .place-body {
+        grid-template-columns: minmax(0, 1fr) minmax(118px, 156px);
       }
 
       .site-header {
@@ -970,12 +1021,17 @@
                 <button class="map-tab active" type="button" data-region="europe">欧洲</button>
                 <button class="map-tab" type="button" data-region="china">中国</button>
               </div>
-              <div class="place-kicker" id="placeRegion">Europe Memory</div>
-              <div class="place-name" id="placeName">Paris</div>
-              <div class="place-date" id="placeDate">2025.12.11</div>
-              <p class="place-memory" id="placeMemory">第一站落在巴黎，把故事从这一天认真点亮。</p>
+              <div class="place-body">
+                <div>
+                  <div class="place-kicker" id="placeRegion">Europe Memory</div>
+                  <div class="place-name" id="placeName">Paris</div>
+                  <div class="place-date" id="placeDate">2025.12.11</div>
+                  <p class="place-memory" id="placeMemory">第一站落在巴黎，把故事从这一天认真点亮。</p>
+                </div>
+                <figure class="place-photo" id="placePhoto"></figure>
+              </div>
             </div>
-            <p class="map-note">新增地点时，只需要在脚本里的地点数组继续添加城市、区域、坐标、日期和小记忆。</p>
+            <p class="map-note">新增地点时，只需要在脚本里的地点数组继续添加城市、区域、坐标、日期、小记忆和照片。</p>
           </aside>
           <div class="map-stage" id="mapStage" aria-label="互动旅行地图">
             <div class="map-fallback">正在连接真实地图。若没有网络，城市记忆仍可在左侧查看。</div>
@@ -1027,11 +1083,11 @@
     ];
 
     const places = [
-      { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", lat: 48.8566, lng: 2.3522 },
-      { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", lat: 64.1466, lng: -21.9426 },
-      { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", lat: 41.3851, lng: 2.1734 },
-      { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", lat: 38.9067, lng: 1.4206 },
-      { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", lat: 37.8516, lng: 15.2853 }
+      { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", photo: "", lat: 48.8566, lng: 2.3522 },
+      { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", photo: "", lat: 64.1466, lng: -21.9426 },
+      { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", photo: "", lat: 41.3851, lng: 2.1734 },
+      { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", photo: "", lat: 38.9067, lng: 1.4206 },
+      { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", photo: "", lat: 37.8516, lng: 15.2853 }
     ];
 
     const mapViews = {
@@ -1060,6 +1116,7 @@
     const placeName = document.getElementById("placeName");
     const placeDate = document.getElementById("placeDate");
     const placeMemory = document.getElementById("placeMemory");
+    const placePhoto = document.getElementById("placePhoto");
     const footprintStat = document.getElementById("footprintStat");
     const tabs = Array.from(document.querySelectorAll(".map-tab"));
     let travelMap;
@@ -1075,6 +1132,11 @@
       placeName.textContent = place?.name ?? "暂无国内足迹";
       placeDate.textContent = place?.date ?? "先不放置任何内容";
       placeMemory.textContent = place?.memory ?? "国内部分暂时没有，等以后有了真实城市再点亮。";
+      placePhoto.hidden = !place;
+      placePhoto.innerHTML = place ? place.photo
+        ? `<img src="${place.photo}" alt="${place.name} travel memory">`
+        : `<div class="place-photo-placeholder"><span>${place.flag}</span><b>Photo</b></div>`
+        : "";
       mapMarkers.forEach(({ marker, place: markerPlace }) => {
         const markerElement = marker.getElement();
         if (markerElement) {

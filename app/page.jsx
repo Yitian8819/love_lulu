@@ -24,11 +24,11 @@ const letters = [
 ];
 
 const places = [
-  { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", lat: 48.8566, lng: 2.3522 },
-  { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", lat: 64.1466, lng: -21.9426 },
-  { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", lat: 41.3851, lng: 2.1734 },
-  { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", lat: 38.9067, lng: 1.4206 },
-  { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", lat: 37.8516, lng: 15.2853 }
+  { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", photo: "", lat: 48.8566, lng: 2.3522 },
+  { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", photo: "", lat: 64.1466, lng: -21.9426 },
+  { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", photo: "", lat: 41.3851, lng: 2.1734 },
+  { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", photo: "", lat: 38.9067, lng: 1.4206 },
+  { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", photo: "", lat: 37.8516, lng: 15.2853 }
 ];
 
 const mapViews = {
@@ -315,12 +315,28 @@ function TravelMap({ totalDays }) {
                   </button>
                 ))}
               </div>
-              <div className="place-kicker">{region === "europe" ? "Europe Memory" : "China Memory"}</div>
-              <div className="place-name">{activePlace?.name ?? "暂无国内足迹"}</div>
-              <div className="place-date">{activePlace?.date ?? "先不放置任何内容"}</div>
-              <p className="place-memory">{activePlace?.memory ?? "国内部分暂时没有，等以后有了真实城市再点亮。"}</p>
+              <div className="place-body">
+                <div>
+                  <div className="place-kicker">{region === "europe" ? "Europe Memory" : "China Memory"}</div>
+                  <div className="place-name">{activePlace?.name ?? "暂无国内足迹"}</div>
+                  <div className="place-date">{activePlace?.date ?? "先不放置任何内容"}</div>
+                  <p className="place-memory">{activePlace?.memory ?? "国内部分暂时没有，等以后有了真实城市再点亮。"}</p>
+                </div>
+                {activePlace && (
+                  <figure className="place-photo">
+                    {activePlace.photo ? (
+                      <img src={activePlace.photo} alt={`${activePlace.name} travel memory`} />
+                    ) : (
+                      <div className="place-photo-placeholder">
+                        <span>{activePlace.flag}</span>
+                        <b>Photo</b>
+                      </div>
+                    )}
+                  </figure>
+                )}
+              </div>
             </div>
-            <p className="map-note">新增地点时，只需要在页面里的地点数组继续添加城市、区域、坐标、日期和小记忆。</p>
+            <p className="map-note">新增地点时，只需要在页面里的地点数组继续添加城市、区域、坐标、日期、小记忆和照片。</p>
           </aside>
           <div className="map-stage" aria-label="互动旅行地图" ref={mapStageRef}>
             {mapError && <div className="map-fallback">真实地图需要网络加载 OpenStreetMap。现在可以先查看左侧城市记忆。</div>}
