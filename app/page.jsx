@@ -24,18 +24,15 @@ const letters = [
 ];
 
 const places = [
-  { region: "europe", country: "France", name: "Paris", date: "未来待补充", memory: "把第一枚地标钉在地图上，等真正一起经过这里的时候，再把这一行换成那天的风和光。", lat: 48.8566, lng: 2.3522 },
-  { region: "europe", country: "Netherlands", name: "Amsterdam", date: "未来待补充", memory: "适合骑车、看水面和把照片拍得很干净的城市。", lat: 52.3676, lng: 4.9041 },
-  { region: "europe", country: "Switzerland", name: "Zurich", date: "未来待补充", memory: "湖边的安静，应该很适合放进一封很慢的信。", lat: 47.3769, lng: 8.5417 },
-  { region: "europe", country: "Italy", name: "Rome", date: "未来待补充", memory: "如果以后去了这里，就把某个傍晚留给冰淇淋和石板路。", lat: 41.9028, lng: 12.4964 },
-  { region: "china", country: "China", name: "Beijing", date: "未来待补充", memory: "第一颗中国地图上的星，先替未来的见面占一个位置。", lat: 39.9042, lng: 116.4074 },
-  { region: "china", country: "China", name: "Shanghai", date: "未来待补充", memory: "想把夜晚、江风和并肩走路都写进这里。", lat: 31.2304, lng: 121.4737 },
-  { region: "china", country: "China", name: "Chengdu", date: "未来待补充", memory: "适合慢一点、热一点，也适合一起吃很多好吃的。", lat: 30.5728, lng: 104.0668 },
-  { region: "china", country: "China", name: "Guangzhou", date: "未来待补充", memory: "南方的风先留在这里，等以后放进真实的一天。", lat: 23.1291, lng: 113.2644 }
+  { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", lat: 48.8566, lng: 2.3522 },
+  { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", lat: 64.1466, lng: -21.9426 },
+  { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", lat: 41.3851, lng: 2.1734 },
+  { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", lat: 38.9067, lng: 1.4206 },
+  { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", lat: 37.8516, lng: 15.2853 }
 ];
 
 const mapViews = {
-  europe: { center: [48.8, 7.2], zoom: 4 },
+  europe: { center: [49.2, -3.2], zoom: 4 },
   china: { center: [32.8, 108.5], zoom: 4 }
 };
 
@@ -243,12 +240,17 @@ function TravelMap({ totalDays }) {
         markersRef.current = [];
         mapRef.current.setView(mapViews[region].center, mapViews[region].zoom);
 
+        if (!visiblePlaces.length) {
+          window.setTimeout(() => mapRef.current?.invalidateSize(), 80);
+          return;
+        }
+
         visiblePlaces.forEach((place) => {
           const marker = L.marker([place.lat, place.lng], {
             title: place.name,
             icon: L.divIcon({
               className: "",
-              html: `<div class="map-pin${activePlace?.name === place.name ? " active" : ""}"><span>${place.name.slice(0, 1)}</span></div>`,
+              html: `<div class="map-pin${activePlace?.name === place.name ? " active" : ""}"><span>${place.flag}</span></div>`,
               iconSize: [36, 36],
               iconAnchor: [18, 34]
             })
@@ -313,15 +315,16 @@ function TravelMap({ totalDays }) {
                   </button>
                 ))}
               </div>
-              <div className="place-kicker">{activePlace?.region === "europe" ? "Europe Memory" : "China Memory"}</div>
-              <div className="place-name">{activePlace?.name}</div>
-              <div className="place-date">{activePlace?.date}</div>
-              <p className="place-memory">{activePlace?.memory}</p>
+              <div className="place-kicker">{region === "europe" ? "Europe Memory" : "China Memory"}</div>
+              <div className="place-name">{activePlace?.name ?? "暂无国内足迹"}</div>
+              <div className="place-date">{activePlace?.date ?? "先不放置任何内容"}</div>
+              <p className="place-memory">{activePlace?.memory ?? "国内部分暂时没有，等以后有了真实城市再点亮。"}</p>
             </div>
             <p className="map-note">新增地点时，只需要在页面里的地点数组继续添加城市、区域、坐标、日期和小记忆。</p>
           </aside>
           <div className="map-stage" aria-label="互动旅行地图" ref={mapStageRef}>
             {mapError && <div className="map-fallback">真实地图需要网络加载 OpenStreetMap。现在可以先查看左侧城市记忆。</div>}
+            {!mapError && !visiblePlaces.length && <div className="map-fallback">国内部分暂时没有，先不放置任何内容。</div>}
           </div>
         </div>
       </div>
