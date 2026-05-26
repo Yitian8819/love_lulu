@@ -446,7 +446,18 @@ section {
   position: relative;
 }
 
-.photo::before {
+.photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.photo.has-image {
+  background: #22332d;
+}
+
+.photo:not(.has-image)::before {
   content: "";
   position: absolute;
   left: 14%;
@@ -934,8 +945,8 @@ section {
 
 .script-center h3 {
   margin: 0;
-  font-family: ui-serif, "Songti SC", "STSong", Georgia, serif;
-  font-size: clamp(30px, 4.2vw, 48px);
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "Songti SC", cursive;
+  font-size: clamp(20px, 2.8vw, 32px);
   line-height: 1.08;
   letter-spacing: 0;
   text-align: center;
@@ -967,6 +978,8 @@ section {
 
 .script-line p {
   margin: 12px 0 0;
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "PingFang SC", cursive;
+  font-style: italic;
   color: #5e7067;
   font-size: clamp(15px, 1.7vw, 18px);
   line-height: 1.8;
@@ -987,50 +1000,148 @@ section {
 .letter-page {
   position: relative;
   z-index: 1;
-  width: min(780px, calc(100% - 32px));
   min-height: 100vh;
+  padding-bottom: clamp(54px, 8vw, 92px);
+}
+
+.letter-hero {
+  position: relative;
+  min-height: min(520px, 72vh);
+  width: 100%;
   display: grid;
   place-items: center;
-  margin: 0 auto;
-  padding: 42px 0;
+  padding: clamp(82px, 13vw, 138px) 18px clamp(74px, 11vw, 118px);
+  overflow: hidden;
+}
+
+.letter-hero::before,
+.letter-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.letter-hero::before {
+  background: linear-gradient(180deg, rgba(16, 16, 16, .38) 0%, rgba(16, 16, 16, .18) 18%, rgba(255, 255, 255, .06) 72%, rgba(255, 255, 255, .78) 100%);
+}
+
+.letter-hero::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .18)),
+    url("/hero-sunset.jpeg") center/cover no-repeat;
+  filter: saturate(1.03) contrast(1.03);
+  transform: scale(1.02);
+  z-index: -1;
+}
+
+.letter-hero-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #fffaf6;
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "Songti SC", cursive;
+  font-size: clamp(50px, 9vw, 104px);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: .04em;
+  text-align: center;
+  text-shadow: 0 8px 26px rgba(67, 43, 28, .34);
+}
+
+.letter-content {
+  position: relative;
+  z-index: 1;
+  width: min(860px, calc(100% - 32px));
+  margin: clamp(-58px, -7vw, -34px) auto 0;
 }
 
 .letter-sheet {
+  --letter-line-step: 36px;
+  position: relative;
   width: 100%;
-  padding: clamp(26px, 6vw, 58px);
-  border: 1px solid rgba(233, 121, 112, .18);
-  border-radius: 8px;
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid rgba(233, 181, 137, .32);
+  border-radius: 12px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(255, 247, 232, .74)),
+    linear-gradient(180deg, rgba(255, 252, 245, .92), rgba(255, 247, 232, .92)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--letter-line-step) - 1px),
+      rgba(196, 176, 148, .38) calc(var(--letter-line-step) - 1px),
+      rgba(196, 176, 148, .38) var(--letter-line-step)
+    ),
+    linear-gradient(90deg, transparent 0, transparent 11%, rgba(237, 176, 148, .42) 11%, rgba(237, 176, 148, .42) 11.35%, transparent 11.35%),
     var(--paper);
-  box-shadow: var(--shadow);
+  box-shadow: 0 18px 54px rgba(84, 63, 42, .16);
+  overflow: hidden;
+}
+
+.letter-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18px 18px, rgba(208, 162, 118, .07) 0 1px, transparent 1.5px) 0 0 / 26px 26px,
+    radial-gradient(circle at 78px 52px, rgba(208, 162, 118, .06) 0 1px, transparent 1.5px) 0 0 / 42px 42px;
+  opacity: .8;
+  pointer-events: none;
 }
 
 .back-link {
+  position: relative;
+  z-index: 1;
   display: inline-block;
-  margin-bottom: 34px;
+  margin-bottom: clamp(28px, 5vw, 44px);
   color: var(--leaf);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
 }
 
-.letter-sheet h1 {
-  margin: 18px 0 8px;
-  font-family: ui-serif, "Songti SC", "STSong", Georgia, serif;
-  font-size: clamp(32px, 6vw, 54px);
-  line-height: 1.12;
-  letter-spacing: 0;
+.letter-title {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 0;
+  color: #4d3f34;
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "PingFang SC", cursive;
+  font-size: clamp(18px, 3.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.22;
+  text-align: center;
 }
 
-.letter-author {
+.letter-meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 18px 0 clamp(32px, 5vw, 48px);
   color: var(--coral);
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "PingFang SC", cursive;
+  font-size: clamp(16px, 2.2vw, 20px);
   font-weight: 800;
 }
 
-.letter-sheet p {
-  color: #5e7067;
-  font-size: 16px;
-  line-height: 1.9;
+.letter-body {
+  position: relative;
+  z-index: 1;
+  color: #55483a;
+  font-family: "Hannotate SC", "Kaiti SC", "Xingkai SC", "STKaiti", "PingFang SC", cursive;
+  font-size: 17px;
+  line-height: var(--letter-line-step);
+  letter-spacing: .02em;
+}
+
+.letter-body p {
+  margin: 0 0 var(--letter-line-step);
+  white-space: pre-line;
+}
+
+.letter-signoff {
+  text-align: right;
 }
 
 @media (max-width: 860px) {
@@ -1093,6 +1204,14 @@ section {
 
   .script-portrait.right {
     grid-column: 2;
+  }
+
+  .letter-hero {
+    min-height: 420px;
+  }
+
+  .letter-content {
+    margin-top: -42px;
   }
 }
 
@@ -1194,7 +1313,7 @@ section {
   }
 
   .script-center h3 {
-    font-size: 28px;
+    font-size: 19px;
   }
 
   .script-lines {
@@ -1212,6 +1331,48 @@ section {
 
   .map-stage {
     min-height: 320px;
+  }
+
+  .letter-page {
+    padding-bottom: 46px;
+  }
+
+  .letter-hero {
+    min-height: 360px;
+    padding: 76px 18px 92px;
+  }
+
+  .letter-content {
+    width: min(100% - 20px, 860px);
+    margin-top: -34px;
+  }
+
+  .letter-sheet {
+    padding: 28px 22px 38px;
+    background:
+      linear-gradient(180deg, rgba(255, 252, 245, .94), rgba(255, 247, 232, .94)),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent calc(var(--letter-line-step) - 1px),
+        rgba(196, 176, 148, .38) calc(var(--letter-line-step) - 1px),
+        rgba(196, 176, 148, .38) var(--letter-line-step)
+      ),
+      linear-gradient(90deg, transparent 0, transparent 11%, rgba(237, 176, 148, .42) 11%, rgba(237, 176, 148, .42) 11.35%, transparent 11.35%),
+      var(--paper);
+  }
+
+  .back-link {
+    margin-bottom: 26px;
+  }
+
+  .letter-meta {
+    justify-content: flex-start;
+    margin-bottom: 28px;
+  }
+
+  .letter-title {
+    text-align: left;
   }
 }
 

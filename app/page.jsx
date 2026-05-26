@@ -13,20 +13,17 @@ const initialTimeValues = {
 };
 
 const photos = [
-  { title: "第一张散步", meta: "2025 · placeholder", a: "#dff5ea", b: "#f2a7aa" },
-  { title: "靠窗的位置", meta: "2025 · placeholder", a: "#dcefff", b: "#fff0bf" },
-  { title: "甜甜的下午", meta: "2026 · placeholder", a: "#ffe1d6", b: "#dff5ea" },
-  { title: "地图上的点", meta: "2026 · placeholder", a: "#d8efe4", b: "#e8dfff" },
-  { title: "某天的风", meta: "2026 · placeholder", a: "#ffe9b8", b: "#dcefff" }
+  { title: "从第一束鲜花开始", meta: "2025-12-11 · Paris", image: "/Memory/01.JPG", a: "#dff5ea", b: "#f2a7aa" },
+  { title: "极北的瀑布下", meta: "2025-12-21 · Iceland", image: "/Memory/02.jpeg", a: "#dcefff", b: "#fff0bf" },
+  { title: "和大家一起跨年", meta: "2025-12-31 · Antony", image: "/Memory/03.JPG", a: "#ffe1d6", b: "#dff5ea" },
+  { title: "一起去听演唱会", meta: "2026-01-17 · Paris", image: "/Memory/04.jpeg", a: "#d8efe4", b: "#e8dfff" },
+  { title: "在古城书写爱意❤️", meta: "2026-05-19 · Dalt Vila", image: "/Memory/05.jpeg", a: "#ffe9b8", b: "#dcefff" }
 ];
 
 const letters = [
-  { id: "first-light", date: "2025.12.11", from: "Ganzhe → Lulu", title: "第一束认真亮起的光", preview: "把今晚收好，留给以后慢慢打开。" },
-  { id: "soft-winter", date: "2025.12.24", from: "Lulu → Ganzhe", title: "冬天也可以很甜", preview: "有些话像热饮，握在手里就不冷了。" },
-  { id: "new-year", date: "2026.01.01", from: "Ganzhe → Lulu", title: "新年的第一封", preview: "想和你一起把很多普通日子变得不普通。" },
-  { id: "tiny-map", date: "2026.02.14", from: "Lulu → Ganzhe", title: "地图上的小标记", preview: "下一次见面，就把这个点改成真实坐标。" },
-  { id: "spring-window", date: "2026.03.21", from: "Ganzhe → Lulu", title: "窗边的春天", preview: "等风变软，我们就一起去晒太阳。" },
-  { id: "long-road", date: "2026.05.20", from: "Lulu → Ganzhe", title: "慢慢走也没关系", preview: "时间轴很长，我们还有很多格子可以填满。" }
+  { id: "first-light", date: "2025.12.11", from: "小鹿 → 大人", title: "最喜欢听小鹿叫大人的大人", preview: "你好呀，我生活里出现的新伙伴！" },
+  { id: "soft-winter", date: "2026.04.28", from: "甘蔗 → 小鹿", title: "见字如晤", preview: "你在跃动之间撞破我的心墙，在我的心田里荡漾起汩汩河水。" },
+  { id: "new-year", date: "2026.04.28", from: "小鹿 → 甘蔗", title: "展信舒颜", preview: "很可爱，我们就这样错峰地，接住了彼此脆弱的瞬间。" }
 ];
 
 const places = [
@@ -39,52 +36,52 @@ const places = [
 
 const scripts = [
   {
-    title: "雾港来信",
+    title: "之间邮局",
     leftRole: {
-      name: "沈栖迟",
-      line: "若真相只能在潮声里浮起，那我愿意陪你等到天亮。",
-      image: "",
+      name: "向树",
+      line: "烟花是天空中的树，向树是地上的烟花。",
+      image: "/JB/JB_Xiangshu.JPG",
       a: "#dcefff",
       b: "#f2a7aa"
     },
     rightRole: {
-      name: "林见鹿",
-      line: "我把所有没有说出口的答案，都藏进了最后一封信。",
-      image: "",
+      name: "江知岸",
+      line: "一个男孩学会勇敢的时候，全世界都会帮他！",
+      image: "/JB/JB_Jiangzhian.JPG",
       a: "#dff5ea",
       b: "#fff0bf"
     }
   },
   {
-    title: "长夜钟楼",
+    title: "在尼莫点建一座灯塔",
     leftRole: {
-      name: "顾明烛",
-      line: "钟声第十三次响起前，我必须记起我们为什么来到这里。",
-      image: "",
+      name: "归雁",
+      line: "让我做你永不熄灭的灯塔，你做我永不迷失的航向。",
+      image: "/JB/JB_Guiyan.JPG",
       a: "#ffe1d6",
       b: "#dcefff"
     },
     rightRole: {
-      name: "苏晚星",
-      line: "别怕，黑夜只是把秘密放大，黎明会替我们作证。",
-      image: "",
+      name: "海星",
+      line: "只要有你，世间所有的目光与议论，便都不值一提。",
+      image: "/JB/JB_Haixing.JPG",
       a: "#e8dfff",
       b: "#dff5ea"
     }
   },
   {
-    title: "春山旧梦",
+    title: "永不褪色的山楂林",
     leftRole: {
-      name: "谢云舟",
-      line: "这一局若是旧梦重开，我仍会先走向你。",
-      image: "",
+      name: "瞿蓉",
+      line: "金风玉露一相逢，便胜却人间无数。",
+      image: "/JB/JB_Qurong.JPG",
       a: "#fff0bf",
       b: "#f2a7aa"
     },
     rightRole: {
-      name: "白清和",
-      line: "山风会记得所有离别，也会记得我们重逢的路。",
-      image: "",
+      name: "陈小虎",
+      line: "我不是一个浪漫的人，却独独想为你做尽浪漫的事。",
+      image: "/JB/JB_Chenxiaohu.JPG",
       a: "#d8efe4",
       b: "#dcefff"
     }
@@ -209,7 +206,9 @@ function FilmAlbum() {
         <div className="film-strip" aria-label="胶卷相册横向列表">
           {photos.map((photo, index) => (
             <article className="film-card" style={{ "--photo-a": photo.a, "--photo-b": photo.b }} key={photo.title}>
-              <div className="photo" data-index={pad(index + 1)} />
+              <div className={`photo${photo.image ? " has-image" : ""}`} data-index={pad(index + 1)}>
+                {photo.image ? <img src={photo.image} alt={photo.title} /> : null}
+              </div>
               <div className="film-meta">
                 <strong>{photo.title}</strong>
                 <span>{photo.meta}</span>
@@ -464,8 +463,8 @@ function TravelMap({ totalDays }) {
                 <div>
                   <div className="place-kicker">{region === "europe" ? "Europe Memory" : "China Memory"}</div>
                   <div className="place-name">{activePlace?.name ?? "暂无国内足迹"}</div>
-                  <div className="place-date">{activePlace?.date ?? "先不放置任何内容"}</div>
-                  <p className="place-memory">{activePlace?.memory ?? "国内部分暂时没有，等以后有了真实城市再点亮。"}</p>
+                  <div className="place-date">{activePlace?.date ?? "不远的将来"}</div>
+                  <p className="place-memory">{activePlace?.memory ?? "在不远的将来，一起去更多地方吧！"}</p>
                 </div>
                 {activePlace && (
                   <figure className="place-photo">
@@ -485,7 +484,7 @@ function TravelMap({ totalDays }) {
           </aside>
           <div className="map-stage" aria-label="互动旅行地图" ref={mapStageRef}>
             {mapError && <div className="map-fallback">真实地图需要网络加载 OpenStreetMap。现在可以先查看左侧城市记忆。</div>}
-            {!mapError && !visiblePlaces.length && <div className="map-fallback">国内部分暂时没有，先不放置任何内容。</div>}
+            {!mapError && !visiblePlaces.length && <div className="map-fallback">这里暂时没有哦</div>}
           </div>
         </div>
       </div>
