@@ -626,8 +626,8 @@ section {
 
 .place-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(118px, 168px);
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   align-items: start;
 }
 
@@ -661,10 +661,9 @@ section {
 }
 
 .place-photo {
-  width: min(168px, 100%);
-  aspect-ratio: 9 / 16;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   margin: 0;
-  justify-self: end;
   border: 1px solid rgba(77, 139, 103, .18);
   border-radius: 8px;
   overflow: hidden;
@@ -848,10 +847,6 @@ section {
 @media (max-width: 860px) {
   .map-grid {
     grid-template-columns: 1fr;
-  }
-
-  .place-body {
-    grid-template-columns: minmax(0, 1fr) minmax(118px, 156px);
   }
 
   .site-header {

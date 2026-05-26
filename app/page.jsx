@@ -5,6 +5,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 const loveStart = new Date("2025-12-11T23:00:00+01:00").getTime();
 const pad = (number) => String(number).padStart(2, "0");
+const initialTimeValues = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0
+};
 
 const photos = [
   { title: "第一张散步", meta: "2025 · placeholder", a: "#dff5ea", b: "#f2a7aa" },
@@ -346,9 +352,10 @@ function TravelMap({ totalDays }) {
 }
 
 export default function Home() {
-  const [timeValues, setTimeValues] = useState(() => getTimeValues());
+  const [timeValues, setTimeValues] = useState(initialTimeValues);
 
   useEffect(() => {
+    setTimeValues(getTimeValues());
     const timer = window.setInterval(() => setTimeValues(getTimeValues()), 1000);
     return () => window.clearInterval(timer);
   }, []);
