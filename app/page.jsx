@@ -37,6 +37,60 @@ const places = [
   { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", photo: "/Journey_Taormina.jpeg", lat: 37.8516, lng: 15.2853 }
 ];
 
+const scripts = [
+  {
+    title: "雾港来信",
+    leftRole: {
+      name: "沈栖迟",
+      line: "若真相只能在潮声里浮起，那我愿意陪你等到天亮。",
+      image: "",
+      a: "#dcefff",
+      b: "#f2a7aa"
+    },
+    rightRole: {
+      name: "林见鹿",
+      line: "我把所有没有说出口的答案，都藏进了最后一封信。",
+      image: "",
+      a: "#dff5ea",
+      b: "#fff0bf"
+    }
+  },
+  {
+    title: "长夜钟楼",
+    leftRole: {
+      name: "顾明烛",
+      line: "钟声第十三次响起前，我必须记起我们为什么来到这里。",
+      image: "",
+      a: "#ffe1d6",
+      b: "#dcefff"
+    },
+    rightRole: {
+      name: "苏晚星",
+      line: "别怕，黑夜只是把秘密放大，黎明会替我们作证。",
+      image: "",
+      a: "#e8dfff",
+      b: "#dff5ea"
+    }
+  },
+  {
+    title: "春山旧梦",
+    leftRole: {
+      name: "谢云舟",
+      line: "这一局若是旧梦重开，我仍会先走向你。",
+      image: "",
+      a: "#fff0bf",
+      b: "#f2a7aa"
+    },
+    rightRole: {
+      name: "白清和",
+      line: "山风会记得所有离别，也会记得我们重逢的路。",
+      image: "",
+      a: "#d8efe4",
+      b: "#dcefff"
+    }
+  }
+];
+
 const mapViews = {
   europe: { center: [49.2, -3.2], zoom: 4 },
   china: { center: [32.8, 108.5], zoom: 4 }
@@ -189,6 +243,94 @@ function LetterTimeline() {
               </div>
               <span className="letter-foot"><span>{letter.from}</span><span>打开信件 →</span></span>
             </Link>
+          ))}
+        </div>
+      </div>
+    </WindowFrame>
+  );
+}
+
+function CharacterPortrait({ role, side }) {
+  return (
+    <figure className={`script-portrait ${side}`} style={{ "--portrait-a": role.a, "--portrait-b": role.b }}>
+      {role.image ? (
+        <img src={role.image} alt={`${role.name} 人物立绘`} />
+      ) : (
+        <div className="script-portrait-placeholder" aria-label={`${role.name} 人物立绘占位`}>
+          <span>{side === "left" ? "L" : "R"}</span>
+          <b>{role.name}</b>
+        </div>
+      )}
+    </figure>
+  );
+}
+
+function ScriptWorld() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef(null);
+
+  const scrollToCard = (index) => {
+    const nextIndex = (index + scripts.length) % scripts.length;
+    setActiveIndex(nextIndex);
+    trackRef.current?.children[nextIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center"
+    });
+  };
+
+  const updateActiveFromScroll = () => {
+    if (!trackRef.current) {
+      return;
+    }
+
+    const track = trackRef.current;
+    const trackCenter = track.scrollLeft + track.clientWidth / 2;
+    const nearestIndex = Array.from(track.children).reduce((nearest, child, index) => {
+      const childCenter = child.offsetLeft + child.clientWidth / 2;
+      const distance = Math.abs(childCenter - trackCenter);
+      return distance < nearest.distance ? { index, distance } : nearest;
+    }, { index: 0, distance: Infinity }).index;
+
+    setActiveIndex(nearestIndex);
+  };
+
+  return (
+    <WindowFrame title="script world">
+      <div className="section-pad script-world">
+        <div className="section-title">
+          <div>
+            <h2>剧本世界</h2>
+            <p>那些并肩走过的故事，也会在这里留下角色和台词。</p>
+          </div>
+          <div className="script-controls" aria-label="剧本世界切换">
+            <button type="button" onClick={() => scrollToCard(activeIndex - 1)} aria-label="上一张剧本卡">‹</button>
+            <span>{pad(activeIndex + 1)} / {pad(scripts.length)}</span>
+            <button type="button" onClick={() => scrollToCard(activeIndex + 1)} aria-label="下一张剧本卡">›</button>
+          </div>
+        </div>
+
+        <div className="script-track" ref={trackRef} onScroll={updateActiveFromScroll} aria-label="剧本杀卡片列表">
+          {scripts.map((script) => (
+            <article className="script-card" key={script.title}>
+              <CharacterPortrait role={script.leftRole} side="left" />
+              <div className="script-center">
+                <div>
+                  <h3>{script.title}</h3>
+                </div>
+                <div className="script-lines">
+                  <div className="script-line">
+                    <span>{script.leftRole.name}</span>
+                    <p>{script.leftRole.line}</p>
+                  </div>
+                  <div className="script-line">
+                    <span>{script.rightRole.name}</span>
+                    <p>{script.rightRole.line}</p>
+                  </div>
+                </div>
+              </div>
+              <CharacterPortrait role={script.rightRole} side="right" />
+            </article>
           ))}
         </div>
       </div>
@@ -368,6 +510,7 @@ export default function Home() {
         <FilmAlbum />
         <LetterTimeline />
         <TravelMap totalDays={timeValues.days} />
+        <ScriptWorld />
         <div className="footer">Ganzhe & Lulu · a soft room growing one memory at a time</div>
       </main>
     </>
