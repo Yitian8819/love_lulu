@@ -30,11 +30,11 @@ const letters = [
 ];
 
 const places = [
-  { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "第一站落在巴黎，把故事从这一天认真点亮。", photo: "", lat: 48.8566, lng: 2.3522 },
-  { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在很北的地方留下冬天的坐标，也留下靠近彼此的温度。", photo: "", lat: 64.1466, lng: -21.9426 },
-  { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "把海风、街角和明亮的五月一起放进地图里。", photo: "", lat: 41.3851, lng: 2.1734 },
-  { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "岛上的一天单独闪光，适合被标成一枚小小的星。", photo: "", lat: 38.9067, lng: 1.4206 },
-  { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", photo: "", lat: 37.8516, lng: 15.2853 }
+  { region: "europe", country: "France", name: "Paris", flag: "🇫🇷", date: "2025.12.11", memory: "巴黎的相遇是一束玫瑰花，是一场大雪，是一节晚归时无人的车厢。", photo: "/Journey_Paris.jpeg", lat: 48.8566, lng: 2.3522 },
+  { region: "europe", country: "Iceland", name: "Reykjavik", flag: "🇮🇸", date: "2025.12.20", memory: "在极北极寒之地，我们紧紧相拥。", photo: "/Journey_Iceland.jpeg", lat: 64.1466, lng: -21.9426 },
+  { region: "europe", country: "Spain", name: "Barcelona", flag: "🇪🇸", date: "2026.5.18", memory: "在无数线条的交织里，我们穿梭流连。", photo: "/Journey_Barcelona.jpeg", lat: 41.3851, lng: 2.1734 },
+  { region: "europe", country: "Spain", name: "Ibiza", flag: "🇪🇸", date: "2026.5.19", memory: "来自小岛的生日祝福，在心里标下一枚小小的星。", photo: "/Journey_Ibiza.jpeg", lat: 38.9067, lng: 1.4206 },
+  { region: "europe", country: "Italy", name: "Taormina", flag: "🇮🇹", date: "2026.5.21", memory: "把西西里的蓝和山城的风，钉在五月的最后一枚地标上。", photo: "/Journey_Taormina.jpeg", lat: 37.8516, lng: 15.2853 }
 ];
 
 const mapViews = {
@@ -123,7 +123,7 @@ function Hero({ timeValues }) {
             <TimerCard label="Seconds" value={pad(timeValues.seconds)} />
           </div>
         </div>
-        <p className="masthead-subtitle">把细碎的日子收进一扇明亮的窗口里。这里有正在生长的时间、等待替换成真实照片的胶卷、可以越写越长的信件轴，还有以后会慢慢点亮的旅行地图。</p>
+        <p className="masthead-subtitle">想记录下我们之间的每一刻点滴。看，我们在这里寄出信件，留下照片，走过世界的各个角落。这是我们共同的旅程，欢迎你，我的爱人💞。</p>
       </div>
     </section>
   );
@@ -147,10 +147,10 @@ function FilmAlbum() {
       <div className="section-pad">
         <div className="section-title">
           <div>
-            <h2>胶卷相册</h2>
-            <p>先用占位画面留好位置，之后把照片地址换进去就好。</p>
+            <h2>胶卷记忆</h2>
+            <p>那些难忘的时刻，都值得一张照片来珍藏。</p>
           </div>
-          <span className="hint">横向滚动查看更多</span>
+          <span className="hint">横向滚动 · 查看更多</span>
         </div>
         <div className="film-strip" aria-label="胶卷相册横向列表">
           {photos.map((photo, index) => (
@@ -174,10 +174,10 @@ function LetterTimeline() {
       <div className="section-pad letters-wrap">
         <div className="section-title">
           <div>
-            <h2>互相寄信的时间轴</h2>
-            <p>每个节点都是一封未来可以打开的信。时间轴会向右继续生长。</p>
+            <h2>几封情书</h2>
+            <p>时间轴会向右生长，爱意会藏进墨香。</p>
           </div>
-          <span className="hint">左右滚动 · 点击节点跳转</span>
+          <span className="hint">左右滚动 · 点击查看</span>
         </div>
         <div className="letters-track" aria-label="信件时间轴">
           {letters.map((letter) => (
@@ -297,7 +297,7 @@ function TravelMap({ totalDays }) {
         <div className="section-title">
           <div>
             <h2>旅行地图</h2>
-            <p>重要城市先点亮一点点，后面可以继续把时间和记忆补上。</p>
+            <p>这里是我们用一起用双脚丈量过的世界。</p>
           </div>
           <span className="hint">切换区域 · 点击地标</span>
         </div>
@@ -339,7 +339,7 @@ function TravelMap({ totalDays }) {
                 )}
               </div>
             </div>
-            <p className="map-note">新增地点时，只需要在页面里的地点数组继续添加城市、区域、坐标、日期、小记忆和照片。</p>
+            <p className="map-note">每一个城市，都记录着我们独一无二的回忆。</p>
           </aside>
           <div className="map-stage" aria-label="互动旅行地图" ref={mapStageRef}>
             {mapError && <div className="map-fallback">真实地图需要网络加载 OpenStreetMap。现在可以先查看左侧城市记忆。</div>}
